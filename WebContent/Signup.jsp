@@ -49,7 +49,7 @@ html, body, #header {
     </select><br>
 </form>
 
-<button name="create" style="margin: 10px">Create Account</button>
+<input type="submit" value="Create Account"/>
 
 </body>
 </html>

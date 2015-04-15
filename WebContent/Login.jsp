@@ -22,10 +22,10 @@ html, body, #header {
 
 <forms>
     Full name: <input type="text" name="fname" style="margin: 10px"><br>
-</form>
+</forms>
 
-<button name="login" style="margin: 10px">Login</button>
-<button name="create" style="margin: 10px">Sign Up</button>
+<input type="submit" value="Login"/>
+<input type="submit" value="Sign Up"/>
 
 </body>
 </html>
