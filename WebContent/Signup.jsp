@@ -30,7 +30,7 @@ html, body, #header {
     </font>
 </p>
 
-<forms>
+<form name="form1" action="signup">
     Full name: <input type="text" name="fname" style="margin: 10px"><br>
     Age: <input type="text" name="age" style="margin: 10px"><br>  
     User Role: <select name="role" style="margin: 10px">
@@ -46,10 +46,9 @@ html, body, #header {
        %>
        <option value="<%= option %>"><%= option %></option>
        <% } %>
-    </select><br>
+    </select><br>   
+    <input type="submit" value="Create Account"/>
 </form>
-
-<input type="submit" value="Create Account"/>
 
 </body>
 </html>

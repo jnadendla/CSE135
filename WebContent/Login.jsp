@@ -25,7 +25,7 @@ html, body, #header {
 </forms>
 
 <input type="submit" value="Login"/>
-<input type="submit" value="Sign Up"/>
+<input type="submit" value="Sign Up" onClick="JavaScript:window.location='Signup.jsp';"/>
 
 </body>
 </html>
