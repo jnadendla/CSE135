@@ -16,4 +16,18 @@ public class Signup {
       boolean add = udb.addUser(fresh);
       return add;
    }
+   
+   /**
+    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      System.out.println("Made it here");
+   }
+
+   /**
+    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+   }
 }

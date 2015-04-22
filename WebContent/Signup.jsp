@@ -33,29 +33,25 @@ html, body, #header {
 		<font size="6"> Account Information </font>
 	</p>
 
-	<form name="form1" action="signup">
-		Full name: <input type="text" name="fname" style="margin: 10px"><br>
-		Age: <input type="text" name="age" style="margin: 10px"><br>
-		User Role: <select name="role" style="margin: 10px">
-			<%
-				for (int i = 0; i < roleList.length; i++) {
-					String option = roleList[i];
-			%>
-			<option value="<%=option%>"><%=option%></option>
-			<%
-				}
-			%>
-		</select><br> State: <select name="state" style="margin: 10px">
-			<%
-				for (int i = 0; i < stateList.length; i++) {
-					String option = stateList[i];
-			%>
-			<option value="<%=option%>"><%=option%></option>
-			<%
-				}
-			%>
-		</select><br> <input type="submit" value="Create Account" />
-	</form>
+<form name="form1" action="Signup.jsp" method="GET">
+    Full name: <input type="text" name="fname" style="margin: 10px"><br>
+    Age: <input type="text" name="age" style="margin: 10px"><br>  
+    User Role: <select name="role" style="margin: 10px">
+       <%  for(int i = 0; i < roleList.length; i++) {
+       String option = roleList[i];
+	   %>
+	   <option value="<%= option %>"><%= option %></option>
+	   <% } %>
+    </select><br>
+    State: <select name="state" style="margin: 10px">
+       <%  for(int i = 0; i < stateList.length; i++) {
+       String option = stateList[i];
+       %>
+       <option value="<%= option %>"><%= option %></option>
+       <% } %>
+    </select><br>   
+    <input type="submit" value="Create Account"/>
+</form>
 
 </body>
 </html>
