@@ -21,7 +21,7 @@ public class Signup extends HttpServlet{
       
       String strAge = request.getParameter("age");
       if(strAge == null || strAge == "") {
-         doPost(request, response);
+         response.sendRedirect("SignupFailure.jsp");
          return;
       }
       
@@ -32,13 +32,20 @@ public class Signup extends HttpServlet{
       
       if(name == null || role == null || state == null ||
          name == "" || role == "" || state == "") {
-         doPost(request, response);
+         response.sendRedirect("SignupFailure.jsp");
          return;
       }
       
       fresh = new User(name, age, role, state);
       
       boolean success = udb.addUser(fresh);
+      if(success) {
+         response.sendRedirect("SignupSuccess.jsp");
+      }
+      else {
+         response.sendRedirect("SignupFailure.jsp");
+      }
+      doPost(request, response);
    }
 
    /**
@@ -46,6 +53,6 @@ public class Signup extends HttpServlet{
     */
    @Override
    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      response.sendRedirect("ErrorSignup.jsp");
+
    }
 }
