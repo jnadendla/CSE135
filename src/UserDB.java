@@ -16,6 +16,9 @@ public class UserDB {
 	  
       db.aquireConnection();
       try {
+      	 if(account == getUser(account.name))
+            return false;
+            
          PreparedStatement ps = db.connection.prepareStatement("INSERT INTO users "
                + "(name, age, role, state) VALUES (?,?,?,?)");
          ps.setString(1, account.name);
