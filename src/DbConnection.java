@@ -5,7 +5,9 @@ import java.util.Properties;
 
 public class DbConnection {
    
+   String driver = "org.postgresql.Driver";
    String url = "jdbc:postgresql://localhost:5432/Accounts";
+   String uurl = "postgres://postgres@localhost:5432/Accounts";
    String user = "postgres";
    String password = "cse135";
    
@@ -16,9 +18,10 @@ public class DbConnection {
          return connection;
       else {
          try {
-            Properties prop = new Properties();
+            Class.forName(driver);
+
             connection = DriverManager.getConnection(url, user, password);
-         } catch (SQLException e) {
+         } catch (Exception e) {
             System.out.println("Error trying to aquire connection");
             e.printStackTrace();
          }
