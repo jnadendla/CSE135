@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class Signup {
+public class Signup extends HttpServlet{
 
    public boolean addUserToDB(String name, int age, String role, String state) {
       UserDB udb = new UserDB();
