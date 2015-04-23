@@ -1,27 +1,22 @@
+<%@page import="javax.swing.text.html.Option"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <%
-	String[] roleList = { "Customer", "Owner" };
-	String[] stateList = { "Alabama", "Alaska", "Arizona", "Arkansas",
-			"California", "Colorado", "Connecticut", "Delaware",
-			"District of Columbia", "Florida", "Georgia", "Hawaii",
-			"Idaho", "Illinois", "Indiana", "Iowa", "Kansas",
-			"Kentucky", "Louisiana", "Maine", "Maryland",
-			"Massachusetts", "Michigan", "Minnesota", "Mississippi",
-			"Missouri", "Montana", "Nebraska", "Nevada",
-			"New Hampshire", "New Jersey", "New Mexico", "New York",
-			"North Carolina", "North Dakota", "Ohio", "Oklahoma",
-			"Oregon", "Pennsylvania", "Rhode Island", "South Carolina",
-			"South Dakota", "Tennessee", "Texas", "Utah", "Vermont",
-			"Virginia", "Washington", "West Virginia", "Wisconsin",
-			"Wyoming" };
+String[] roleList = {"Customer", "Owner"};
+String[] stateList = {"Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware",
+      "District of Columbia", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa",
+      "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota",
+      "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico",
+      "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island",
+      "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington",
+      "West Virginia", "Wisconsin", "Wyoming"};
 %>
 <style type="text/css">
 html, body, #header {
-	margin: 10px !important;
-	padding: 10px !important;
+    margin: 10px !important;
+    padding: 10px !important;
 }
 </style>
 <head>
@@ -29,9 +24,11 @@ html, body, #header {
 <title>Sign Up</title>
 </head>
 <body style="text-align: center;">
-	<p style="text-align: center;">
-		<font size="6"> Account Information </font>
-	</p>
+<p style="text-align: center;">
+    <font size="6">
+        Account Information
+    </font>
+</p>
 
 <form name="form1" action="Signup.jsp" method="GET">
     Full name: <input type="text" name="fname" style="margin: 10px"><br>
