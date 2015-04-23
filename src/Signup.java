@@ -9,19 +9,25 @@ import javax.servlet.http.HttpServletResponse;
 
 public class Signup extends HttpServlet{
 
-   public boolean addUserToDB(String name, int age, String role, String state) {
-      UserDB udb = new UserDB();
-      User fresh = new User(name,age,role,state);
-      
-      boolean add = udb.addUser(fresh);
-      return add;
-   }
+	UserDB udb = new UserDB();
    
    /**
     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
     */
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       System.out.println("Made it here");
+      
+      String name = request.getParameter("fname");
+      
+      String strAge = request.getParameter("age");
+      int age = Integer.parseInt(strAge);
+      
+      String role = request.getParameter("role");
+      String state = request.getParameter("state");
+      
+      User u = new User(name, age, role, state);
+      
+      udb.addUser(u); // add user  
    }
 
    /**

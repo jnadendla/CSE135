@@ -11,7 +11,9 @@ public class UserDB {
       db = new DbConnection();
    }
    
-   public boolean addUser(User account) {   
+   public boolean addUser(User account) { 
+	  System.out.println("Adding user " + account);
+	  
       db.aquireConnection();
       try {
          PreparedStatement ps = db.connection.prepareStatement("INSERT INTO users "
