@@ -2,10 +2,10 @@
 public class User {
    public String name;
    public int age;
-   public String role;
-   public String state;
+   public int role;
+   public int state;
    
-   public User(String name, int age, String role, String state) {
+   public User(String name, int age, int role, int state) {
       this.name = name;
       this.age = age;
       this.role = role;
@@ -20,11 +20,11 @@ public class User {
       return age;
    }
    
-   public String getRole() {
+   public int getRole() {
       return role;
    }
    
-   public String getState() {
+   public int getState() {
       return state;
    }
 }
