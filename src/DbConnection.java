@@ -7,7 +7,6 @@ public class DbConnection {
    
    String driver = "org.postgresql.Driver";
    String url = "jdbc:postgresql://localhost:5432/Accounts";
-   String uurl = "postgres://postgres@localhost:5432/Accounts";
    String user = "postgres";
    String password = "cse135";
    
