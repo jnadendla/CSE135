@@ -19,11 +19,13 @@ public class Signup extends HttpServlet{
    @Override
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       User fresh;
+      PrintWriter pw = response.getWriter();
+      
       String name = request.getParameter("fname");
       
       String strAge = request.getParameter("age");
       if(strAge == null || strAge == "") {
-         response.sendRedirect("SignupFailure.jsp");
+         printFailure(pw);
          return;
       }
       
@@ -35,7 +37,7 @@ public class Signup extends HttpServlet{
       int state = sdb.getStateID(temp_state);
       
       if(name == null || name == "") {
-         response.sendRedirect("SignupFailure.jsp");
+         printFailure(pw);
          return;
       }
       
@@ -43,10 +45,10 @@ public class Signup extends HttpServlet{
       
       boolean success = udb.addUser(fresh);
       if(success) {
-         response.sendRedirect("SignupSuccess.jsp");
+         printSuccess(pw);
       }
       else {
-         response.sendRedirect("SignupFailure.jsp");
+         printFailure(pw);
       }
       doPost(request, response);
    }
@@ -57,5 +59,31 @@ public class Signup extends HttpServlet{
    @Override
    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+   }
+   
+   private void printFailure(PrintWriter pw) {
+      pw.println("<html>");
+      pw.println("<head>");
+      pw.println("<title>Failure</title>");
+      pw.println("</head>");
+      pw.println("<body>");
+      pw.println("<p style=\"color:red\">");
+      pw.println("<font size=\"4\">SIGN UP FAILURE: Insufficient User Information Was Input</font>");
+      pw.println("</p>");
+      pw.println("</body>");
+      pw.println("</html>");
+   }
+   
+   private void printSuccess(PrintWriter pw) {
+      pw.println("<html>");
+      pw.println("<head>");
+      pw.println("<title>Failure</title>");
+      pw.println("</head>");
+      pw.println("<body>");
+      pw.println("<p style=\"color:blue\">");
+      pw.println("<font size=\"4\">You have successfully signed up</font>");
+      pw.println("</p>");
+      pw.println("</body>");
+      pw.println("</html>");
    }
 }
