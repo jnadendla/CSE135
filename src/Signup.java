@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 public class Signup extends HttpServlet{
    
    UserDB udb = new UserDB();
+   RolesDB rdb = new RolesDB();
+   StatesDB sdb = new StatesDB();
    
    /**
     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -27,11 +29,12 @@ public class Signup extends HttpServlet{
       
       int age = Integer.parseInt(strAge);
       
-      String role = request.getParameter("role");
-      String state = request.getParameter("state");
+      String temp_role = request.getParameter("role");
+      int role = rdb.getRoleID(temp_role);
+      String temp_state = request.getParameter("state");
+      int state = sdb.getStateID(temp_state);
       
-      if(name == null || role == null || state == null ||
-         name == "" || role == "" || state == "") {
+      if(name == null || name == "") {
          response.sendRedirect("SignupFailure.jsp");
          return;
       }
