@@ -27,7 +27,7 @@ public class UserDB {
          ps.execute();
          
          db.connection.commit();
-         db.connection.close();
+         //db.connection.close();
       } catch (SQLException e) {
          System.out.println("Error adding user");
          e.printStackTrace();
@@ -44,12 +44,13 @@ public class UserDB {
          PreparedStatement ps = db.connection.prepareStatement("SELECT * FROM users WHERE id = ?");
          ps.setInt(1, id);
          ResultSet result = ps.executeQuery();
-         result.next();
-         ret = new User(result.getString(2), result.getInt(3),
-               result.getInt(4), result.getInt(5));
+         if(result.next()) {
+            ret = new User(result.getString(2), result.getInt(3),
+                           result.getInt(4), result.getInt(5));
+         }
          
          db.connection.commit();
-         db.connection.close();
+         //db.connection.close();
       } catch (SQLException e) {
          System.out.println("Error reading user");
          e.printStackTrace();
@@ -65,12 +66,14 @@ public class UserDB {
          PreparedStatement ps = db.connection.prepareStatement("SELECT * FROM users WHERE name = ?");
          ps.setString(1, name);
          ResultSet result = ps.executeQuery();
+         //if(result.next()) {
          result.next();
-         ret = new User(result.getString(2), result.getInt(3),
-               result.getInt(4), result.getInt(5));
+            ret = new User(result.getString(2), result.getInt(3),
+                           result.getInt(4), result.getInt(5));
+         //}
          
          db.connection.commit();
-         db.connection.close();
+         //db.connection.close();
       } catch (SQLException e) {
          System.out.println("Error reading user");
          e.printStackTrace();

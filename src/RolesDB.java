@@ -22,7 +22,7 @@ public class RolesDB {
          role = result.getInt(2);
          
          db.connection.commit();
-         db.connection.close();
+         //db.connection.close();
       } catch (SQLException e) {
          System.out.println("Error reading role");
          e.printStackTrace();
@@ -42,7 +42,7 @@ public class RolesDB {
          role = result.getInt(1);
          
          db.connection.commit();
-         db.connection.close();
+         //db.connection.close();
       } catch (SQLException e) {
          System.out.println("Error reading role");
          e.printStackTrace();
