@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 public class Signup extends HttpServlet{
    
    UserDB udb = new UserDB();
+   RolesDB rdb = new RolesDB();
+   StatesDB sdb = new StatesDB();
    
    /**
     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -17,22 +19,25 @@ public class Signup extends HttpServlet{
    @Override
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       User fresh;
+      PrintWriter pw = response.getWriter();
+      
       String name = request.getParameter("fname");
       
       String strAge = request.getParameter("age");
       if(strAge == null || strAge == "") {
-         response.sendRedirect("SignupFailure.jsp");
+         printFailure(pw);
          return;
       }
       
       int age = Integer.parseInt(strAge);
       
-      String role = request.getParameter("role");
-      String state = request.getParameter("state");
+      String temp_role = request.getParameter("role");
+      int role = rdb.getRoleID(temp_role);
+      String temp_state = request.getParameter("state");
+      int state = sdb.getStateID(temp_state);
       
-      if(name == null || role == null || state == null ||
-         name == "" || role == "" || state == "") {
-         response.sendRedirect("SignupFailure.jsp");
+      if(name == null || name == "") {
+         printFailure(pw);
          return;
       }
       
@@ -40,10 +45,10 @@ public class Signup extends HttpServlet{
       
       boolean success = udb.addUser(fresh);
       if(success) {
-         response.sendRedirect("SignupSuccess.jsp");
+         printSuccess(pw);
       }
       else {
-         response.sendRedirect("SignupFailure.jsp");
+         printFailure(pw);
       }
       doPost(request, response);
    }
@@ -54,5 +59,31 @@ public class Signup extends HttpServlet{
    @Override
    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+   }
+   
+   private void printFailure(PrintWriter pw) {
+      pw.println("<html>");
+      pw.println("<head>");
+      pw.println("<title>Failure</title>");
+      pw.println("</head>");
+      pw.println("<body>");
+      pw.println("<p style=\"color:red\">");
+      pw.println("<font size=\"4\">SIGN UP FAILURE: Insufficient User Information Was Input</font>");
+      pw.println("</p>");
+      pw.println("</body>");
+      pw.println("</html>");
+   }
+   
+   private void printSuccess(PrintWriter pw) {
+      pw.println("<html>");
+      pw.println("<head>");
+      pw.println("<title>Failure</title>");
+      pw.println("</head>");
+      pw.println("<body>");
+      pw.println("<p style=\"color:blue\">");
+      pw.println("<font size=\"4\">You have successfully signed up</font>");
+      pw.println("</p>");
+      pw.println("</body>");
+      pw.println("</html>");
    }
 }

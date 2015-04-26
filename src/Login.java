@@ -23,14 +23,31 @@ public class Login extends HttpServlet{
       session = request.getSession();
       
       User found;
-      System.out.println(request.getParameter("fname"));
       String name = request.getParameter("fname");
 
       found = udb.getUser(name);
       
       if(found != null) {
-         session.setAttribute("user", found);
+         session.setAttribute("userName", found.name);
+         session.setAttribute("userAge", found.age);
+         session.setAttribute("userRole", found.role);
+         session.setAttribute("userState", found.state);
          response.sendRedirect("Home.jsp");
+      }
+      else{
+         PrintWriter pw = response.getWriter();
+         pw.println("<html>");
+         pw.println("<head>");
+         pw.println("<title>Failure</title>");
+         pw.println("</head>");
+         pw.println("<body>");
+         pw.println("<p style=\"color:red\">");
+         pw.println("<font size=\"4\">The provided name </font>");
+         pw.println("<font size=\"4\">" + name +"</font>");
+         pw.println("<font size=\"4\"> is not known</font>");
+         pw.println("</p>");
+         pw.println("</body>");
+         pw.println("</html>");
       }
    }
 

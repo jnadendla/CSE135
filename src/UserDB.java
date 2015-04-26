@@ -11,20 +11,19 @@ public class UserDB {
       db = new DbConnection();
    }
    
-   public boolean addUser(User account) { 
-	  System.out.println("Adding user " + account);
-	  
+   public boolean addUser(User account) {   
       db.aquireConnection();
       try {
-      	 //if(account == getUser(account.name))
-          //  return false;
-            
+
+         //if(account == getUser(account.name))
+           // return false;
+         
          PreparedStatement ps = db.connection.prepareStatement("INSERT INTO users "
                + "(name, age, role, state) VALUES (?,?,?,?)");
          ps.setString(1, account.name);
          ps.setInt(2, account.age);
-         ps.setString(3, account.role);
-         ps.setString(4, account.state);
+         ps.setInt(3, account.role);
+         ps.setInt(4, account.state);
          ps.execute();
          
          db.connection.commit();
@@ -42,18 +41,19 @@ public class UserDB {
       User ret = null;
       try {
          db.aquireConnection();
-         java.sql.Statement s = db.connection.createStatement();
-         ResultSet result = s.executeQuery("SELECT " + id + " FROM users");
-         ret = new User(result.getString(1), result.getInt(2),
-               result.getString(3), result.getString(4));
+         PreparedStatement ps = db.connection.prepareStatement("SELECT * FROM users WHERE id = ?");
+         ps.setInt(1, id);
+         ResultSet result = ps.executeQuery();
+         result.next();
+         ret = new User(result.getString(2), result.getInt(3),
+               result.getInt(4), result.getInt(5));
          
          db.connection.commit();
          db.connection.close();
       } catch (SQLException e) {
          System.out.println("Error reading user");
          e.printStackTrace();
-      }
-      
+      }      
       
       return ret;
    }
@@ -62,18 +62,19 @@ public class UserDB {
       User ret = null;
       try {
          db.aquireConnection();
-         java.sql.Statement s = db.connection.createStatement();
-         ResultSet result = s.executeQuery("SELECT " + name + " FROM users");
-         ret = new User(result.getString(1), result.getInt(2),
-               result.getString(3), result.getString(4));
+         PreparedStatement ps = db.connection.prepareStatement("SELECT * FROM users WHERE name = ?");
+         ps.setString(1, name);
+         ResultSet result = ps.executeQuery();
+         result.next();
+         ret = new User(result.getString(2), result.getInt(3),
+               result.getInt(4), result.getInt(5));
          
          db.connection.commit();
          db.connection.close();
       } catch (SQLException e) {
          System.out.println("Error reading user");
          e.printStackTrace();
-      }
-      
+      }     
       
       return ret;
    }
