@@ -6,10 +6,10 @@ import java.util.Properties;
 public class DbConnection {
    
    String driver = "org.postgresql.Driver";
-   String url = "jdbc:postgresql://localhost:5432/Accounts";
-   String uurl = "postgres://postgres@localhost:5432/Accounts";
-   String user = "postgres";
-   String password = "cse135";
+   String url = "jdbc:postgresql://localhost:5432/phoebe";
+   //String uurl = "postgres://postgres@localhost:5432/phoebe";
+   String user = "phoebe";
+   String password = "";
    
    Connection connection = null;
    
