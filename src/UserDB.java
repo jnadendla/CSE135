@@ -49,7 +49,7 @@ public class UserDB {
          }
          
          db.connection.commit();
-         db.connection.close();
+         //db.connection.close();
       } catch (SQLException e) {
          System.out.println("Error reading user");
          e.printStackTrace();
