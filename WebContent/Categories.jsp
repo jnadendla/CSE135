@@ -111,8 +111,7 @@
 		<tr>
 			<td>
 				<p style="color: red">
-					<font size="4"> NO PERMISSION TO VIEW THIS PAGE </font>
-				</p>
+					<font size="4"> This page is available to owners only.
 			</td>
 		</tr>
 		<%
