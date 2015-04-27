@@ -1,3 +1,4 @@
+package db;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -7,7 +8,7 @@ public class DbConnection {
    
    String driver = "org.postgresql.Driver";
 
-   String url = "jdbc:postgresql://localhost:5432/phoebe";
+   String url = "jdbc:postgresql://localhost:5432/CSE135_P1";
    String user = "phoebe";
    String password = "";
 

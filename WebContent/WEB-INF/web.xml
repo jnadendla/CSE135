@@ -23,5 +23,14 @@
     <servlet-name>Signup</servlet-name>
     <url-pattern>/Signup</url-pattern>
   </servlet-mapping>
-
+  
+  <servlet>
+    <display-name>Categories</display-name>
+    <servlet-name>Categories</servlet-name>
+    <servlet-class>Categories</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Categories</servlet-name>
+    <url-pattern>/Categories</url-pattern>
+  </servlet-mapping>
 </web-app>

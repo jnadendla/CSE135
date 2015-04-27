@@ -1,3 +1,4 @@
+package db;
 
 public class User {
    public String name;
