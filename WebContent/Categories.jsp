@@ -50,6 +50,7 @@
 					ResultSet rs = cdb.getCategories();
 			%>
 			<!-- Add an HTML table header row to format the results -->
+			<span class="error" style="color: red">${error}</span>
 			<table border="1">
 				<tr>
 					<th>ID</th>
@@ -111,7 +112,7 @@
 		<tr>
 			<td>
 				<p style="color: red">
-					<font size="4"> This page is available to owners only.
+					<font size="4"> This page is available to owners only. 
 			</td>
 		</tr>
 		<%
