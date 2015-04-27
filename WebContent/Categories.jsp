@@ -11,7 +11,7 @@
 </head>
 <body>
 	<p>
-		<font size="6"> Home </font>
+		<font size="6"> Categories </font>
 	</p>
 	<p style="color: green;">
 		<font size="3"> Hello </font> <font size="3"> <%
@@ -25,21 +25,31 @@
 				<%-- -------- Include menu HTML code -------- --%> <jsp:include
 					page="/menu.html" />
 			</td>
+		</tr>
+		<%@ page import="db.UserDB"%>
+		<%@ page import="db.User"%>
+		<%
+			UserDB udb = new UserDB();
+			User user = udb.getUser(userName);
+
+			// only owners can see categories page 
+			if (user.getRole() == 1) {
+		%>
+		<tr>
+			<!-- Categories Table -->
 			<%-- Import the java.sql package --%>
 			<%@ page import="java.sql.*"%>
 			<%@ page import="db.CategoriesDB"%>
 			<%-- -------- SELECT Statement Code -------- --%>
 			<%
-					// Create the statement
+				// Create the statement
 					CategoriesDB cdb = new CategoriesDB();
 
 					// Use the created statement to SELECT
 					// the student attributes FROM the Student table.
 					ResultSet rs = cdb.getCategories();
-				%>
+			%>
 			<!-- Add an HTML table header row to format the results -->
-		</tr>
-		<tr>
 			<table border="1">
 				<tr>
 					<th>ID</th>
@@ -59,9 +69,9 @@
 
 				<%-- -------- Iteration Code -------- --%>
 				<%
-						// Iterate over the ResultSet
+					// Iterate over the ResultSet
 						while (rs.next()) {
-					%>
+				%>
 
 				<tr>
 					<form action="Categories" method="POST">
@@ -90,11 +100,24 @@
 					</form>
 				</tr>
 				<%
-						}
-					%>
+					}
+				%>
 			</table>
 
 		</tr>
+		<%
+			} else {
+		%>
+		<tr>
+			<td>
+				<p style="color: red">
+					<font size="4"> NO PERMISSION TO VIEW THIS PAGE </font>
+				</p>
+			</td>
+		</tr>
+		<%
+			}
+		%>
 	</table>
 </body>
 </html>
