@@ -27,6 +27,14 @@ CREATE TABLE products (
 	category	INTEGER REFERENCES categories (id) NOT NULL
 );
 
+CREATE TABLE purchased (
+	id 	SERIAL PRIMARY KEY,
+	usr	INTEGER REFERENCES users (id) NOT NULL,
+	product	INTEGER REFERENCES products (id) NOT NULL,
+	quantity	INTEGER,
+	price	INTEGER
+);
+
 --Insert data into tables
 
 INSERT INTO roles (role) VALUES ('Owner');
