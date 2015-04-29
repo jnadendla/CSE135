@@ -30,7 +30,7 @@ html, body, #header {
     </font>
 </p>
 
-<form name="form1" action="Signup" method="get">
+<form name="form1" action="Signup" method="post">
     Full name: <input type="text" name="fname" style="margin: 10px"><br>
     Age: <input type="text" name="age" style="margin: 10px"><br>  
     User Role: <select name="role" style="margin: 10px">
