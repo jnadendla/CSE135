@@ -19,10 +19,11 @@ html, body, #header {
     </font>
 </p>
 
-<form action="Login" method="get">
+<form action="Login" method="post">
     Full name: <input type="text" name="fname" style="margin: 10px"><br>
     <input type="submit" value="Login"/>    
-    <input type="button" value="Sign Up" onClick="JavaScript:window.location='Signup.jsp';"/>
+    <input type="button" value="Sign Up" onClick="JavaScript:window.location='Signup.jsp';"/><br>
+    <br><span class="failure" style="color: red">${failure}</span>
 </form>
 
 </body>
