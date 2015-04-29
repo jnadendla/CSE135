@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import db.ClearedRequest;
 import db.RolesDB;
 import db.StatesDB;
 import db.User;
@@ -23,6 +24,14 @@ public class Signup extends HttpServlet{
     */
    @Override
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+   }
+
+   /**
+    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+    */
+   @Override
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       User fresh;
       PrintWriter pw = response.getWriter();
       
@@ -55,15 +64,6 @@ public class Signup extends HttpServlet{
       else {
          printFailure(pw);
       }
-      doPost(request, response);
-   }
-
-   /**
-    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-    */
-   @Override
-   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
    }
    
    private void printFailure(PrintWriter pw) {

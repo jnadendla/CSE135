@@ -1,8 +1,5 @@
 package db;
-import java.beans.Statement;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 
 public class StatesDB {
@@ -10,12 +7,23 @@ public class StatesDB {
    
    public StatesDB() {
       db = new DbConnection();
+      db.aquireConnection();
    }
+   
+   public ResultSet getStates() throws SQLException {
+      // Create the statement
+      Statement statement = db.connection.createStatement();
+
+      // Use the created statement to SELECT
+      // the student attributes FROM the States table.
+      ResultSet rs = statement.executeQuery("SELECT * FROM states");
+      
+      return rs;
+  }
    
    public int getStateName(int id) {
       int state = 0;
       try {
-         db.aquireConnection();
          PreparedStatement ps = db.connection.prepareStatement("SELECT * FROM roles WHERE id = ?");
          ps.setInt(1, id);
          ResultSet result = ps.executeQuery();
@@ -36,7 +44,6 @@ public class StatesDB {
    public int getStateID(String name) {
       int state = 0;
       try {
-         db.aquireConnection();
          PreparedStatement ps = db.connection.prepareStatement("SELECT * FROM states WHERE name = ?");
          ps.setString(1, name);
          ResultSet result = ps.executeQuery();

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
+import db.ClearedRequest;
 import db.User;
 import db.UserDB;
 
@@ -23,6 +24,14 @@ public class Login extends HttpServlet{
     */
    @Override
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+   }
+
+   /**
+    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+    */
+   @Override
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       session = request.getSession();
       
       User found;
@@ -36,29 +45,13 @@ public class Login extends HttpServlet{
          session.setAttribute("userRole", found.role);
          session.setAttribute("userState", found.state);
          response.sendRedirect("Home.jsp");
+         return;
       }
       else{
-         PrintWriter pw = response.getWriter();
-         pw.println("<html>");
-         pw.println("<head>");
-         pw.println("<title>Failure</title>");
-         pw.println("</head>");
-         pw.println("<body>");
-         pw.println("<p style=\"color:red\">");
-         pw.println("<font size=\"4\">The provided name </font>");
-         pw.println("<font size=\"4\">" + name +"</font>");
-         pw.println("<font size=\"4\"> is not known</font>");
-         pw.println("</p>");
-         pw.println("</body>");
-         pw.println("</html>");
+         request.setAttribute("failure", "Unknown user, please try again");
       }
-   }
-
-   /**
-    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-    */
-   @Override
-   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       
+      ClearedRequest creq = new ClearedRequest(request);
+      request.getRequestDispatcher("/Login.jsp").forward(creq, response);
    }
 }
