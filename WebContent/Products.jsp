@@ -23,7 +23,7 @@
 		<tr>
 			<td valign="top">
 				<%-- -------- Include menu HTML code -------- --%> <jsp:include
-					page="/menu.jsp" />
+					page="/menu.html" />
 			</td>
 		</tr>
 		<%@ page import="db.UserDB"%>
