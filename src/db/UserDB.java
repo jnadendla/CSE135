@@ -15,9 +15,9 @@ public class UserDB {
    public boolean addUser(User account) {   
       db.aquireConnection();
       try {
-
-         //if(account == getUser(account.name))
-           // return false;
+         if(getUser(account.name) != null) {
+            return false;
+         }
          
          PreparedStatement ps = db.connection.prepareStatement("INSERT INTO users "
                + "(name, age, role, state) VALUES (?,?,?,?)");
@@ -51,7 +51,7 @@ public class UserDB {
          }
          
          db.connection.commit();
-         //db.connection.close();
+         db.connection.close();
       } catch (SQLException e) {
          System.out.println("Error reading user");
          e.printStackTrace();

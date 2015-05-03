@@ -82,7 +82,7 @@ public class Signup extends HttpServlet{
    private void printSuccess(PrintWriter pw) {
       pw.println("<html>");
       pw.println("<head>");
-      pw.println("<title>Failure</title>");
+      pw.println("<title>Success</title>");
       pw.println("</head>");
       pw.println("<body>");
       pw.println("<p style=\"color:blue\">");
