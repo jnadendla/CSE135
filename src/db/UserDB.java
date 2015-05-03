@@ -83,4 +83,25 @@ public class UserDB {
       return ret;
    }
    
+   public int getUserId(String name) {
+      int ret = 0;
+      try {
+         db.aquireConnection();
+         PreparedStatement ps = db.connection.prepareStatement("SELECT * FROM users WHERE name = ?");
+         ps.setString(1, name);
+         ResultSet result = ps.executeQuery();
+         result.next();
+         ret = result.getInt(1);
+         
+         
+         db.connection.commit();
+         //db.connection.close();
+      } catch (SQLException e) {
+         System.out.println("Error reading user");
+         e.printStackTrace();
+      }     
+      
+      return ret;
+   }
+   
 }
