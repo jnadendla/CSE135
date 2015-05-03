@@ -1,49 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-	id="WebApp_ID" version="2.5">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
 
-	<!-- General Web Application Description -->
-	<display-name>CSE135</display-name>
+<!-- General Web Application Description -->
+  <display-name>CSE135</display-name>
 
-	<servlet>
-		<display-name>Login</display-name>
-		<servlet-name>Login</servlet-name>
-		<servlet-class>Login</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Login</servlet-name>
-		<url-pattern>/Login</url-pattern>
-	</servlet-mapping>
+  <servlet>
+    <display-name>Login</display-name>
+    <servlet-name>Login</servlet-name>
+    <servlet-class>Login</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Login</servlet-name>
+    <url-pattern>/Login</url-pattern>
+  </servlet-mapping>
 
-	<servlet>
-		<display-name>Signup</display-name>
-		<servlet-name>Signup</servlet-name>
-		<servlet-class>Signup</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Signup</servlet-name>
-		<url-pattern>/Signup</url-pattern>
-	</servlet-mapping>
+  <servlet>
+    <display-name>Signup</display-name>
+    <servlet-name>Signup</servlet-name>
+    <servlet-class>Signup</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Signup</servlet-name>
+    <url-pattern>/Signup</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <display-name>Categories</display-name>
+    <servlet-name>Categories</servlet-name>
+    <servlet-class>Categories</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Categories</servlet-name>
+    <url-pattern>/Categories</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+       <display-name>Products</display-name>
+       <servlet-name>Products</servlet-name>
+       <servlet-class>Products</servlet-class>
+   </servlet>
+   <servlet-mapping>
+       <servlet-name>Products</servlet-name>
+       <url-pattern>/Products</url-pattern>
+   </servlet-mapping>
 
-	<servlet>
-		<display-name>Categories</display-name>
-		<servlet-name>Categories</servlet-name>
-		<servlet-class>Categories</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Categories</servlet-name>
-		<url-pattern>/Categories</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<display-name>Products</display-name>
-		<servlet-name>Products</servlet-name>
-		<servlet-class>Products</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Products</servlet-name>
-		<url-pattern>/Products</url-pattern>
-	</servlet-mapping>
+   <servlet>
+       <display-name>ProductBrowser</display-name>
+       <servlet-name>ProductBrowser</servlet-name>
+       <servlet-class>ProductBrowser</servlet-class>
+   </servlet>
+   <servlet-mapping>
+       <servlet-name>ProductBrowser</servlet-name>
+       <url-pattern>/ProductBrowser</url-pattern>
+   </servlet-mapping>
+   
+   <servlet>
+       <display-name>ProductOrder</display-name>
+       <servlet-name>ProductOrder</servlet-name>
+       <servlet-class>ProductOrder</servlet-class>
+   </servlet>
+   <servlet-mapping>
+       <servlet-name>ProductOrder</servlet-name>
+       <url-pattern>/ProductOrder</url-pattern>
+   </servlet-mapping>
 </web-app>
