@@ -20,7 +20,7 @@ public class Products extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-
+		doPost(request, response);
 	}
 
 	/**
@@ -38,7 +38,12 @@ public class Products extends HttpServlet {
 		String category = request.getParameter("category");
 
 		String action = request.getParameter("action");
-		if (action != null && action.equals("insert")) {
+		ClearedRequest creq = new ClearedRequest(request);
+
+		if (action != null && action.equals("search")) {
+			request.getRequestDispatcher("/Products.jsp").forward(request,
+					response);
+		} else if (action != null && action.equals("insert")) {
 
 			if (name == null || name.trim().isEmpty() || sku == null
 					|| sku.trim().isEmpty() || price == null
@@ -56,8 +61,9 @@ public class Products extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
-		}
-		if (action != null && action.equals("update")) {
+			request.getRequestDispatcher("/Products.jsp").forward(creq,
+					response);
+		} else if (action != null && action.equals("update")) {
 
 			if (id == null || id.trim().isEmpty() || name == null
 					|| name.trim().isEmpty() || sku == null
@@ -76,8 +82,9 @@ public class Products extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
-		}
-		if (action != null && action.equals("delete")) {
+			request.getRequestDispatcher("/Products.jsp").forward(creq,
+					response);
+		} else if (action != null && action.equals("delete")) {
 
 			if (id == null || id.trim().isEmpty()) {
 				// show data modification failure
@@ -90,9 +97,8 @@ public class Products extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
+			request.getRequestDispatcher("/Products.jsp").forward(creq,
+					response);
 		}
-
-		ClearedRequest creq = new ClearedRequest(request);
-		request.getRequestDispatcher("/Products.jsp").forward(creq, response);
 	}
 }

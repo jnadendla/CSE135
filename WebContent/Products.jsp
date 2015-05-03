@@ -36,6 +36,40 @@
 			if (user.getRole() == 1) {
 		%>
 		<tr>
+			<%
+				CategoriesDB cdb = new CategoriesDB();
+					ResultSet cs = cdb.getCategories();
+
+					String searchTerm = (String) request.getParameter("searchTerm");
+					String categoryFilter = (String) request
+							.getParameter("categoryFilter");
+			%>
+			<table>
+				<tr>
+					<td>
+						<form action="Products" method="GET">
+							<input type="hidden" name="action" value="search" />
+							<td><select name="categoryFilter" onchange="this.form.submit()">
+									<option value="">Category</option>
+									<%
+										while (cs.next()) {
+									%>
+									<option
+										<%if (categoryFilter != null
+							&& categoryFilter.equals(cs.getString("id"))) {%>
+										selected="selected" <%}%> value=<%=cs.getString("id")%>>
+										<%=cs.getString("name")%>
+									</option>
+									<%
+										}
+									%>
+							</select></td>
+							<td><input value="" name="searchTerm" size="15" /></td>
+							<td><input type="submit" value="Search" /></td>
+						</form>
+					</td>
+				</tr>
+			</table>
 			<!-- Products Table -->
 			<%-- Import the java.sql package --%>
 			<%@ page import="java.sql.*"%>
@@ -43,14 +77,14 @@
 			<%@ page import="db.CategoriesDB"%>
 			<%-- -------- SELECT Statement Code -------- --%>
 			<%
-				// Create the statement
+				System.out.println(searchTerm + ", " + categoryFilter);
+					// Create the statement
 					ProductsDB pdb = new ProductsDB();
-					CategoriesDB cdb = new CategoriesDB();
 
 					// Use the created statement to SELECT
 					// the student attributes FROM the Student table.
-					ResultSet rs = pdb.getProducts();
-					ResultSet cs = cdb.getCategories();
+					ResultSet rs = pdb.getProducts(categoryFilter, searchTerm);
+					cs = cdb.getCategories();
 			%>
 			<!-- Add an HTML table header row to format the results -->
 			<span class="error" style="color: red">${error}</span>
@@ -116,10 +150,8 @@
 											while (cs.next()) {
 								%>
 								<option value=<%=cs.getString("id")%>
-									<%
-									if(rs.getString("category").equals(cs.getString("id"))) {
-								%>
-									selected="selected" <%} %>>
+									<%if (rs.getString("category").equals(cs.getString("id"))) {%>
+									selected="selected" <%}%>>
 									<%=cs.getString("name")%>
 								</option>
 								<%

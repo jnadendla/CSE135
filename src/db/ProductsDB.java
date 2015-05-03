@@ -28,7 +28,37 @@ public class ProductsDB {
 		// Use the created statement to SELECT
 		// the student attributes FROM the Student table.
 		ResultSet rs = statement
-				.executeQuery("SELECT * FROM products WHERE category = " + categoryId);
+				.executeQuery("SELECT * FROM products WHERE category = "
+						+ categoryId);
+
+		return rs;
+	}
+
+	public ResultSet getProducts(String categoryId, String name)
+			throws SQLException {
+		// Create the statement
+		Statement statement = db.connection.createStatement();
+
+		ResultSet rs = null;
+
+		if (categoryId != null && !categoryId.isEmpty() && name != null
+				&& !name.isEmpty()) { // filter both
+			rs = statement
+					.executeQuery("SELECT * FROM products WHERE category = "
+							+ categoryId + " AND name LIKE \'%" + name + "%\'");
+		} else if (categoryId != null && !categoryId.isEmpty()
+				&& (name == null || name.isEmpty())) { // filter category
+			rs = statement
+					.executeQuery("SELECT * FROM products WHERE category = "
+							+ categoryId);
+		} else if ((categoryId == null || categoryId.isEmpty()) && name != null
+				&& name.isEmpty()) { // filter by name
+			rs = statement
+					.executeQuery("SELECT * FROM products WHERE name LIKE \'%"
+							+ name + "%\'");
+		} else { // no filters
+			rs = statement.executeQuery("SELECT * FROM products");
+		}
 
 		return rs;
 	}
