@@ -77,7 +77,6 @@
 			<%@ page import="db.CategoriesDB"%>
 			<%-- -------- SELECT Statement Code -------- --%>
 			<%
-				System.out.println(searchTerm + ", " + categoryFilter);
 					// Create the statement
 					ProductsDB pdb = new ProductsDB();
 

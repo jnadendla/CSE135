@@ -36,6 +36,9 @@ public class ProductsDB {
 
 	public ResultSet getProducts(String categoryId, String name)
 			throws SQLException {
+		
+		System.out.println("catgoryId: " + categoryId);
+		System.out.println("name: " + name);
 		// Create the statement
 		Statement statement = db.connection.createStatement();
 
@@ -51,8 +54,9 @@ public class ProductsDB {
 			rs = statement
 					.executeQuery("SELECT * FROM products WHERE category = "
 							+ categoryId);
-		} else if ((categoryId == null || categoryId.isEmpty()) && name != null
-				&& name.isEmpty()) { // filter by name
+		} else if ((categoryId == null || categoryId.isEmpty()) && (name != null
+				&& !name.isEmpty())) { // filter by name
+			System.out.println("filtering by name");
 			rs = statement
 					.executeQuery("SELECT * FROM products WHERE name LIKE \'%"
 							+ name + "%\'");
