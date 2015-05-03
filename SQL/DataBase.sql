@@ -32,7 +32,7 @@ CREATE TABLE purchased (
 	usr	INTEGER REFERENCES users (id) NOT NULL,
 	product	INTEGER REFERENCES products (id) NOT NULL,
 	quantity	INTEGER,
-	price	INTEGER
+	price	DECIMAL(10,2)
 );
 
 --Insert data into tables
