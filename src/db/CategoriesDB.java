@@ -2,79 +2,92 @@ package db;
 import java.sql.*;
 
 public class CategoriesDB {
-	private DbConnection db;
+    private DbConnection db;
 
-	public CategoriesDB() {
-		db = new DbConnection();
-		db.aquireConnection();
-	}
+    public CategoriesDB() {
+        db = new DbConnection();
+        db.aquireConnection();
+    }
+    
+    public ResultSet getCategory(int id) throws SQLException {
+       // Create the statement
+       Statement statement = db.connection.createStatement();
 
-	public ResultSet getCategories() throws SQLException {
-		// Create the statement
-		Statement statement = db.connection.createStatement();
+       // Use the created statement to SELECT
+       // the student attributes FROM the Student table.
+       ResultSet rs = statement
+               .executeQuery("SELECT * FROM categories WHERE id = "
+                       + id);
 
-		// Use the created statement to SELECT
-		// the student attributes FROM the Student table.
-		ResultSet rs = statement.executeQuery("SELECT * FROM categories");
-		
-		return rs;
-	}
+       return rs;
+    }
 
-	public void insert(String name, String description) throws SQLException {
-		// Begin transaction
-		db.connection.setAutoCommit(false);
+    public ResultSet getCategories() throws SQLException {
+        // Create the statement
+        Statement statement = db.connection.createStatement();
 
-		// Create the prepared statement and use it to
-		// INSERT student values INTO the students table.
-		PreparedStatement pstmt = db.connection
-				.prepareStatement("INSERT INTO categories (name, description) VALUES (?, ?)");
+        // Use the created statement to SELECT
+        // the student attributes FROM the Student table.
+        ResultSet rs = statement.executeQuery("SELECT * FROM categories");
+        
+        return rs;
+    }
 
-		pstmt.setString(1, name);
-		pstmt.setString(2, description);
+    public void insert(String name, String description) throws SQLException {
+        // Begin transaction
+        db.connection.setAutoCommit(false);
 
-		int rowCount = pstmt.executeUpdate();
+        // Create the prepared statement and use it to
+        // INSERT student values INTO the students table.
+        PreparedStatement pstmt = db.connection
+                .prepareStatement("INSERT INTO categories (name, description) VALUES (?, ?)");
 
-		// Commit transaction
-		db.connection.commit();
-		db.connection.setAutoCommit(true);
-	}
+        pstmt.setString(1, name);
+        pstmt.setString(2, description);
 
-	public void update(String name, String description, String id)
-			throws SQLException {
-		// Begin transaction
-		db.connection.setAutoCommit(false);
+        int rowCount = pstmt.executeUpdate();
 
-		// Create the prepared statement and use it to
-		// UPDATE student values in the Students table.
-		PreparedStatement pstmt = db.connection
-				.prepareStatement("UPDATE categories SET name = ?, description = ?"
-						+ " WHERE id = ?");
+        // Commit transaction
+        db.connection.commit();
+        db.connection.setAutoCommit(true);
+    }
 
-		pstmt.setString(1, name);
-		pstmt.setString(2, description);
-		pstmt.setInt(3, Integer.parseInt(id));
+    public void update(String name, String description, String id)
+            throws SQLException {
+        // Begin transaction
+        db.connection.setAutoCommit(false);
 
-		int rowCount = pstmt.executeUpdate();
+        // Create the prepared statement and use it to
+        // UPDATE student values in the Students table.
+        PreparedStatement pstmt = db.connection
+                .prepareStatement("UPDATE categories SET name = ?, description = ?"
+                        + " WHERE id = ?");
 
-		// Commit transaction
-		db.connection.commit();
-		db.connection.setAutoCommit(true);
-	}
+        pstmt.setString(1, name);
+        pstmt.setString(2, description);
+        pstmt.setInt(3, Integer.parseInt(id));
 
-	public void delete(String id) throws SQLException {
-		// Begin transaction
-		db.connection.setAutoCommit(false);
+        int rowCount = pstmt.executeUpdate();
 
-		// Create the prepared statement and use it to
-		// DELETE students FROM the Students table.
-		PreparedStatement pstmt = db.connection
-				.prepareStatement("DELETE FROM categories WHERE id = ?");
+        // Commit transaction
+        db.connection.commit();
+        db.connection.setAutoCommit(true);
+    }
 
-		pstmt.setInt(1, Integer.parseInt(id));
-		int rowCount = pstmt.executeUpdate();
+    public void delete(String id) throws SQLException {
+        // Begin transaction
+        db.connection.setAutoCommit(false);
 
-		// Commit transaction
-		db.connection.commit();
-		db.connection.setAutoCommit(true);
-	}
+        // Create the prepared statement and use it to
+        // DELETE students FROM the Students table.
+        PreparedStatement pstmt = db.connection
+                .prepareStatement("DELETE FROM categories WHERE id = ?");
+
+        pstmt.setInt(1, Integer.parseInt(id));
+        int rowCount = pstmt.executeUpdate();
+
+        // Commit transaction
+        db.connection.commit();
+        db.connection.setAutoCommit(true);
+    }
 }
