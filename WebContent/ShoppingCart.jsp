@@ -28,7 +28,13 @@
                     page="/menu.html" />
             </td>
         </tr>
-                <table border="1" title="Shopping Cart">
+        <table border="1">
+            <%
+                //Get items from cart
+                LinkedList<Purchase> purchases = (LinkedList)session.getAttribute("purchases");
+                if(purchases != null) {   
+            %>
+            <caption>Shopping Cart</caption>
             <tr>
                 <th>ID</th>
                 <th>Name</th>
@@ -40,11 +46,8 @@
             <%@ page import="java.util.LinkedList"%>
             <%@ page import="db.Purchase"%>
             <%
-            LinkedList<Purchase> purchases = (LinkedList)session.getAttribute("purchases");
-                if(purchases != null) {
-            %>
-            <tr>
-            <%
+                   double total_price = 0.0;
+                   //All the items in the shopping cart we want to display
                    for(int i=0; i < purchases.size(); i++) {
                       Purchase p = purchases.get(i);
                       
@@ -54,8 +57,9 @@
                       double _price = p.getPrice();
                       String _category = p.getCategory();
                       int _quantity = p.getQuantity();
-
+                      total_price += _price;
             %>
+            <tr>
                 <form action="PrductOrder" method="post">
                     <td><%=pid %></td>
                     <td><%=_name%></td>
@@ -64,11 +68,20 @@
                     <td><%=_category %></td>
                     <td><%=_quantity%></td>
                 </form>
+            </tr>
             <%
                    }
+                   //round to 2 decimal places
+                   int temp = (int)(total_price * Math.pow(10 , 2));  
+                   total_price = ((double)temp)/Math.pow(10 , 2); 
+            %>
+            <tr>
+                <td><p><b>Total Price:</b></p></td>
+                <td><%=total_price %></td>
+            </tr>
+            <%
                }
             %>
-            </tr>
         </table><br>
         <table border="1">
             <caption>Payment Info</caption>
@@ -77,8 +90,8 @@
                 <th>Finish and Pay</th>    
             </tr>
             <tr>
-                <form>
-                    <th><input type="text" name="card"/></th>
+                <form action="ShoppingCart" method="post">
+                    <th><input type="text" name="card" size="20"/></th>
                     <th><input type="submit" value="Buy"/></th>
                 </form>
             </tr>
