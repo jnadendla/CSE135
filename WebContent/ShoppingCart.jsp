@@ -64,20 +64,17 @@
                     <td><%=pid %></td>
                     <td><%=_name%></td>
                     <td><%=_sku %></td>
-                    <td><%=_price %></td>
+                    <td><%out.print(String.format( "%.2f", _price )); %></td>
                     <td><%=_category %></td>
                     <td><%=_quantity%></td>
                 </form>
             </tr>
             <%
                    }
-                   //round to 2 decimal places
-                   int temp = (int)(total_price * Math.pow(10 , 2));  
-                   total_price = ((double)temp)/Math.pow(10 , 2); 
             %>
             <tr>
                 <td><p><b>Total Price:</b></p></td>
-                <td><%=total_price %></td>
+                <td><%out.print(String.format( "%.2f", total_price )); %></td>
             </tr>
             <%
                }
