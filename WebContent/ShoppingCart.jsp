@@ -57,7 +57,7 @@
                       double _price = p.getPrice();
                       String _category = p.getCategory();
                       int _quantity = p.getQuantity();
-                      total_price += _price;
+                      total_price += (_price * (double)_quantity);
             %>
             <tr>
                 <form action="PrductOrder" method="post">
