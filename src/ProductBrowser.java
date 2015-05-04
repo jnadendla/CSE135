@@ -38,11 +38,10 @@ public class ProductBrowser extends HttpServlet {
             HttpServletResponse response) throws ServletException, IOException {
        HttpSession session = request.getSession();
        UserDB udb = new UserDB();
-       ProductsDB pdb = new ProductsDB();
        
        String action = request.getParameter("action");
-       ClearedRequest creq = new ClearedRequest(request);
 
+       //Action is either search or order product
        if (action != null && action.equals("search")) {
            request.getRequestDispatcher("/ProductBrowser.jsp").forward(request,
                    response);
@@ -54,6 +53,8 @@ public class ProductBrowser extends HttpServlet {
           String price = request.getParameter("price");
           String category = request.getParameter("category");
           
+          //Product Order will use these attributes to display the current
+          //product of interest
           session.setAttribute("userId", user);
           session.setAttribute("productId", product);
           session.setAttribute("pname", name);
