@@ -25,7 +25,7 @@ String userName = (String)session.getAttribute("userName");
     </p>
     <a name="categories" href="JavaScript:window.location='Categories.jsp';">Categories</a>
     <a name="products" href="JavaScript:window.location='Products.jsp';">Products</a>
-    <a name="browse" href="JavaScript:window.location='Products.jsp';">Browse Products</a>
+    <a name="browse" href="JavaScript:window.location='ProductBrowser.jsp';">Browse Products</a>
     <a name="cart" href="JavaScript:window.location='ShoppingCart.jsp';">Shopping Cart</a>
 </body>
 </html>
