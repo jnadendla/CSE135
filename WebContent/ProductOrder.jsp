@@ -61,7 +61,7 @@
             <%
                 //Get items from cart
 	            LinkedList<Purchase> purchases = (LinkedList)session.getAttribute("purchases");
-	            if(purchases != null || purchases.isEmpty()) {   
+	            if(purchases != null) {   
             %>
             <caption>Shopping Cart</caption>
             <tr>
