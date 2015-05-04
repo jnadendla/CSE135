@@ -1,107 +1,71 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<%
-    String userName = (String) session.getAttribute("userName");
-%>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Product Order</title>
-</head>
-<body>
-    <p>
-        <font size="6"> Order Product </font>
-    </p>
-    <p style="color: green;">
-        <font size="3"> Hello </font> <font size="3">
-        <%
-        //print welcom user
-        out.print(userName);
-        %>
-        </font>
-    </p>
-    <table>
-        <tr>
-            <td valign="top">
-                <%-- -------- Include menu HTML code -------- --%> <jsp:include
-                    page="/menu.html" />
-            </td>
-        </tr>
-        <table border="1">
-            <tr>
-	            <th>ID</th>
-	            <th>Name</th>
-	            <th>SKU</th>
-	            <th>Price</th>
-	            <th>Category</th>
-	            <th>Quantity</th>   
-            </tr>
-            <tr>
-                <%
-                    Integer id = (Integer) session.getAttribute("productId");
-                    int productID = (int)id;
-	                String productName = (String) session.getAttribute("pname");
-	                String sku = (String) session.getAttribute("sku");
-	                String price = (String) session.getAttribute("price");
-	                String category = (String) session.getAttribute("category");
-                %>
-                <form action="ProductOrder" method="post">
-                    <td><%=productID %></td>
-                    <td><%=productName %></td>
-                    <td><%=sku %></td>
-                    <td><%=price %></td>
-                    <td><%=category %></td>
-                    <td><input name="quantity" input="text"/></td>
-                    <td><input type="submit" value="Add to Cart"/></td>
-                </form>
-            </tr>
-        </table><br>
-        <table border="1">
-            <caption>Shopping Cart</caption>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>SKU</th>
-                <th>Price</th>
-                <th>Category</th>
-                <th>Quantity</th>
-            </tr>
-            <%@ page import="java.util.LinkedList"%>
-            <%@ page import="db.Purchase"%>
-            <%
-            LinkedList<Purchase> purchases = (LinkedList)session.getAttribute("purchases");
-	            if(purchases != null) {
-            %>
-            <tr>
-            <%
-	               for(int i=0; i < purchases.size(); i++) {
-	                  Purchase p = purchases.get(i);
-	                  
-	                  int pid = p.getProductId();
-	                  String _name = p.getProductName();
-	                  String _sku = p.getSku();
-	                  double _price = p.getPrice();
-	                  String _category = p.getCategory();
-	                  int _quantity = p.getQuantity();
 
-            %>
-                <form action="PrductOrder" method="post">
-                    <td><%=pid %></td>
-                    <td><%=_name%></td>
-                    <td><%=_sku %></td>
-                    <td><%=_price %></td>
-                    <td><%=_category %></td>
-                    <td><%=_quantity%></td>
-                </form>
-            <%
-	               }
-               } else {
-                  out.print("Cart Empty");
-               }
-            %>
-            </tr>
-        </table>
-    </table>
-</body>
-</html> 
+
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.LinkedList;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import db.Category;
+import db.ProductsDB;
+import db.ClearedRequest;
+import db.Purchase;
+import db.UserDB;
+
+public class ProductOrder extends HttpServlet {
+    ProductsDB pdb = new ProductsDB();
+
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+     *      response)
+     */
+    @Override
+    protected void doGet(HttpServletRequest request,
+            HttpServletResponse response) throws ServletException, IOException {
+
+    }
+
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+     *      response)
+     */
+    @Override
+    protected void doPost(HttpServletRequest request,
+            HttpServletResponse response) throws ServletException, IOException {
+       
+       HttpSession session = request.getSession();
+       UserDB udb = new UserDB();       
+       
+       //Get all the info about this purchase occurring
+       int user = udb.getUserId((String)session.getAttribute("userName"));
+       Integer id = (Integer) session.getAttribute("productId");
+       int product = (int)id;
+       String productName = (String) session.getAttribute("pname");
+       String sku = (String) session.getAttribute("sku");
+       int quantity = Integer.parseInt(request.getParameter("quantity"));
+       String priceStr = (String) session.getAttribute("price");
+       String category = (String) session.getAttribute("category");
+       double price = Double.parseDouble(priceStr);
+       double total = price * (double)quantity;
+       
+       Purchase p = new Purchase(user, product, productName, sku, category, quantity, total);
+
+       //LinkedList is actually the shopping cart, so cart is only session based because
+       //we store the cart in the session
+       LinkedList<Purchase> purchases = (LinkedList)session.getAttribute("purchases");
+       if(purchases == null)
+          purchases = new LinkedList<Purchase>();
+
+       purchases.add(p);
+       session.setAttribute("purchases", purchases); //override current purchases object in session
+
+       ClearedRequest creq = new ClearedRequest(request);
+
+       request.getRequestDispatcher("/ProductBrowser.jsp").forward(creq,
+             response);
+    }
+}
