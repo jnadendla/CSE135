@@ -42,9 +42,11 @@ public class ShoppingCart extends HttpServlet {
        PurchaseDB purchasedb = new PurchaseDB();
        
        //Get card information, and only proceed if card has been entered
-       int card = Integer.parseInt(request.getParameter("card"));
-       if(card == 0)
+       String cardStr = request.getParameter("card");
+       if(cardStr == null || cardStr == "")
           return;
+       
+       int card = Integer.parseInt(cardStr);
        
        //Get items from cart and place them in the DataBase
        //LinkedList is actually the shopping cart.
@@ -70,9 +72,6 @@ public class ShoppingCart extends HttpServlet {
 
        session.setAttribute("purchases", cart); //override current purchases object in session
 
-       ClearedRequest creq = new ClearedRequest(request);
-
-       request.getRequestDispatcher("/ShoppingCart.jsp").forward(creq,
-             response);
+       response.sendRedirect("PurchaseComplete.jsp");
     }
 }
