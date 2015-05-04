@@ -1,10 +1,10 @@
 package db;
 import java.sql.*;
 
-public class PurchasedDB {
+public class PurchaseDB {
    private DbConnection db;
    
-   public PurchasedDB() {
+   public PurchaseDB() {
       db = new DbConnection();
       db.aquireConnection();
    }
