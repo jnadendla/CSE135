@@ -52,7 +52,7 @@ public class ProductOrder extends HttpServlet {
        double price = Double.parseDouble(priceStr);
        double total = price * (double)quantity;
        
-       Purchase p = new Purchase(user, product, productName, sku, category, quantity, total);
+       Purchase p = new Purchase(user, product, productName, sku, category, quantity, price);
 
        //LinkedList is actually the shopping cart, so cart is only session based because
        //we store the cart in the session
