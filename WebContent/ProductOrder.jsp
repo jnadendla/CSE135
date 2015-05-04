@@ -52,12 +52,17 @@
                     <td><%=sku %></td>
                     <td><%=price %></td>
                     <td><%=category %></td>
-                    <td><input name="quantity" input="text"/></td>
+                    <td><input name="quantity" input="text" size="15"/></td>
                     <td><input type="submit" value="Add to Cart"/></td>
                 </form>
             </tr>
         </table><br>
         <table border="1">
+            <%
+                //Get items from cart
+	            LinkedList<Purchase> purchases = (LinkedList)session.getAttribute("purchases");
+	            if(purchases != null || purchases.isEmpty()) {   
+            %>
             <caption>Shopping Cart</caption>
             <tr>
                 <th>ID</th>
@@ -70,22 +75,20 @@
             <%@ page import="java.util.LinkedList"%>
             <%@ page import="db.Purchase"%>
             <%
-            LinkedList<Purchase> purchases = (LinkedList)session.getAttribute("purchases");
-	            if(purchases != null) {
+                   double total_price = 0.0;
+                   //All the items in the shopping cart we want to display
+                   for(int i=0; i < purchases.size(); i++) {
+                      Purchase p = purchases.get(i);
+                      
+                      int pid = p.getProductId();
+                      String _name = p.getProductName();
+                      String _sku = p.getSku();
+                      double _price = p.getPrice();
+                      String _category = p.getCategory();
+                      int _quantity = p.getQuantity();
+                      total_price += _price;
             %>
             <tr>
-            <%
-	               for(int i=0; i < purchases.size(); i++) {
-	                  Purchase p = purchases.get(i);
-	                  
-	                  int pid = p.getProductId();
-	                  String _name = p.getProductName();
-	                  String _sku = p.getSku();
-	                  double _price = p.getPrice();
-	                  String _category = p.getCategory();
-	                  int _quantity = p.getQuantity();
-
-            %>
                 <form action="PrductOrder" method="post">
                     <td><%=pid %></td>
                     <td><%=_name%></td>
@@ -94,13 +97,20 @@
                     <td><%=_category %></td>
                     <td><%=_quantity%></td>
                 </form>
+            </tr>
             <%
-	               }
-               } else {
-                  out.print("Cart Empty");
+                   }
+                   //round to 2 decimal places
+                   int temp = (int)(total_price * Math.pow(10 , 2));  
+                   total_price = ((double)temp)/Math.pow(10 , 2); 
+            %>
+            <tr>
+                <td><p><b>Total Price:</b></p></td>
+                <td><%=total_price %></td>
+            </tr>
+            <%
                }
             %>
-            </tr>
         </table>
     </table>
 </body>
