@@ -57,6 +57,8 @@ public class Products extends HttpServlet {
 
 					pdb.insert(name, sku, price, category);
 
+					request.setAttribute("success",
+							"Successfully added " + name);
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}

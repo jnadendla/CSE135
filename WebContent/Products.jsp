@@ -87,6 +87,7 @@
 			%>
 			<!-- Add an HTML table header row to format the results -->
 			<span class="error" style="color: red">${error}</span>
+			<span class="success" style="color: green">${success}</span>
 			<table border="1">
 				<tr>
 					<th>ID</th>
