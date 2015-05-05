@@ -93,12 +93,22 @@
 						<%-- Button --%>
 						<td><input type="submit" value="Update"></td>
 					</form>
+					<%@ page import="db.ProductsDB"%>
+
 					<form action="Categories" method="POST">
 						<input type="hidden" name="action" value="delete" /> <input
 							type="hidden" value="<%=rs.getInt("id")%>" name="id" />
 						<%-- Button --%>
-						<td><input type="submit" value="Delete" /></td>
+						<td><input type="submit" value="Delete"
+							<%
+						ProductsDB pdb = new ProductsDB();
+								ResultSet categoryProducts = pdb.getProducts(rs
+										.getString("id"));
+								if (categoryProducts.next() != false) {
+					%>
+							disabled <%} %> /></td>
 					</form>
+
 				</tr>
 				<%
 					}
