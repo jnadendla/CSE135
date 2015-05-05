@@ -44,7 +44,14 @@ public class Categories extends HttpServlet {
 				// show data modification failure
 				request.setAttribute("error",
 						"Data modification failure: categories/insert");
-			} else {
+				
+			} else if(cdb.containsCategory(name)) {
+				// show data modification failure
+				request.setAttribute("error",
+						"Data modification failure: category already exists");
+				
+			}
+			else {
 				try {
 					cdb.insert(name, description);
 				} catch (SQLException e) {

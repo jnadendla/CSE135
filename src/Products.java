@@ -52,13 +52,18 @@ public class Products extends HttpServlet {
 				// show data modification failure
 				request.setAttribute("error",
 						"Data modification failure: products/insert");
+			} else if (pdb.containsProduct(sku)) {
+				// show data modification failure
+				request.setAttribute("error",
+						"Data modification failure: product already exists");
+
 			} else {
 				try {
 
 					pdb.insert(name, sku, price, category);
 
-					request.setAttribute("success",
-							"Successfully added " + name);
+					request.setAttribute("success", "Successfully added "
+							+ name);
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}

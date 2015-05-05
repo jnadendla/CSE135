@@ -10,6 +10,27 @@ public class ProductsDB {
         db.aquireConnection();
     }
 
+    public boolean containsProduct(String sku) {
+
+		// Use the created statement to SELECT
+		// the student attributes FROM the Student table.
+		ResultSet rs;
+		try {
+			PreparedStatement pstmt = db.connection
+					.prepareStatement("SELECT * FROM products WHERE sku = ?");
+			pstmt.setString(1, sku);
+			rs = pstmt.executeQuery();
+			if (rs.next() != false) {
+				return true;
+			}
+			return false;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return false;
+	}
     public ResultSet getProducts() throws SQLException {
         // Create the statement
         Statement statement = db.connection.createStatement();
