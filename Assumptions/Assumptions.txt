@@ -1,0 +1,5 @@
+Assumption 1: The shopping cart only persists in a given session, so it will be empty when a new session begins.
+Assumption 2: There are unlimited supplies of each product.
+Assumption 3: The price of items in the shopping cart remain the same, even if the product's price is changed
+outside the shopping cart.
+Assumption 4: An owner can delete and/or update every categroy, regardless of whether she was the one who created the category.
